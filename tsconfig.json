@@ -2,11 +2,11 @@
   "compilerOptions": {
     "rootDir": "app",
     "outDir": "build",
-    "module": "CommonJS",
+    "module": "Node16",
     "target": "ES6",
     "strict": true,
     "allowJs": true
   },
   "exclude": ["node_modules"],
-  "files": ["*.ts"]
+  "files": ["app/**.ts"]
 }
