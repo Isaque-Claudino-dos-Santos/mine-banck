@@ -2,7 +2,8 @@
   "compilerOptions": {
     "rootDir": "app",
     "outDir": "build",
-    "module": "ES6",
+    "module": "CommonJS",
+    "target": "ES6",
     "strict": true,
     "allowJs": true
   },
