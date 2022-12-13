@@ -8,5 +8,5 @@
     "allowJs": true
   },
   "exclude": ["node_modules"],
-  "files": ["app/**.ts"]
+  "files": ["app/index.ts"]
 }
