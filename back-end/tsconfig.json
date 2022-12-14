@@ -3,9 +3,11 @@
     "rootDir": "src",
     "outDir": "build",
     "module": "Node16",
-    "target": "ES6",
+    "target": "es6",
     "strict": true,
-    "allowJs": true
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "exclude": ["node_modules"],
   "files": ["src/index.ts"]
