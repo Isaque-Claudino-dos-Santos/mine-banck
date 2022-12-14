@@ -2,10 +2,15 @@ import {
   AutoIncrement,
   Column,
   DataType,
+  Default,
+  ForeignKey,
+  HasOne,
   Model,
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+
+import Client from './Client';
 
 @Table({
   timestamps: true,
@@ -17,8 +22,13 @@ class Account extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
+  @HasOne(() => Client)
+  @Column
+  clientID!: number;
+
+  @Default(0)
   @Column(DataType.FLOAT)
-  balance: number = 0;
+  balance!: number;
 }
 
 export default Account;
