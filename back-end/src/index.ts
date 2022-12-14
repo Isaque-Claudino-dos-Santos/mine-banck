@@ -1,7 +1,6 @@
 import 'dotenv/config';
-
 import app from './server';
 
-app.get('/', (req, res) => {
-  res.send('Welcome to index ...');
-});
+import router from './routes';
+
+app.use(router);
