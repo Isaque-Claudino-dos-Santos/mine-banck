@@ -8,5 +8,5 @@
     "allowJs": true
   },
   "exclude": ["node_modules"],
-  "files": ["src/index.ts", "environment.d.ts"]
+  "files": ["src/index.ts"]
 }
