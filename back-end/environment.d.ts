@@ -1,9 +1,9 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      APP_PROTOCOL: string | undefined;
-      APP_HOST: string | undefined;
-      APP_PORT: string | undefined;
+      APP_PROTOCOL: 'http' | 'https';
+      APP_HOST: string | 'localhost';
+      APP_PORT: number;
     }
   }
 }
