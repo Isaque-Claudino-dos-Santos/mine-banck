@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import app from './server';
 
-import router from './routes';
+import { web } from './routers';
 
-app.use(router);
+app.use(web);
