@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "app",
+    "rootDir": "src",
     "outDir": "build",
     "module": "Node16",
     "target": "ES6",
@@ -8,5 +8,5 @@
     "allowJs": true
   },
   "exclude": ["node_modules"],
-  "files": ["app/index.ts"]
+  "files": ["src/index.ts"]
 }
