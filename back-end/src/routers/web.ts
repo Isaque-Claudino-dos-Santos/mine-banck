@@ -1,10 +1,10 @@
 import { Router } from 'express';
-import HomeController from '../Controllers/HomeCotroller';
+import ClientController from '../Controllers/ClientController';
 
 const router = Router();
 
-const homeController = new HomeController();
+const clientController = new ClientController();
 
-router.get('/', homeController.index);
-
+router.get('/client', clientController.index);
+router.post('/client/store', clientController.store);
 export default router;
