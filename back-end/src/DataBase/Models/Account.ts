@@ -1,10 +1,10 @@
 import {
   AutoIncrement,
+  BelongsTo,
   Column,
   DataType,
   Default,
   ForeignKey,
-  HasOne,
   Model,
   PrimaryKey,
   Table,
@@ -14,7 +14,7 @@ import Client from './Client';
 
 @Table({
   timestamps: true,
-  tableName: 'account',
+  tableName: 'accounts',
 })
 class Account extends Model {
   @AutoIncrement
@@ -22,13 +22,17 @@ class Account extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
-  @HasOne(() => Client)
-  @Column
-  clientID!: number;
+  @BelongsTo(() => Client, {
+    foreignKey: 'id',
+    as: 'client_id',
+    onDelete: 'CASCADE',
+  })
+  @Column(DataType.INTEGER)
+  client!: Client;
 
   @Default(0)
   @Column(DataType.FLOAT)
-  balance!: number;
+  money!: number;
 }
 
 export default Account;

@@ -9,23 +9,27 @@ import {
   AutoIncrement,
   HasOne,
   ForeignKey,
-  BelongsTo,
+  HasMany,
 } from 'sequelize-typescript';
 
 import Account from './Account';
 
 @Table({
   timestamps: true,
-  tableName: 'client',
+  tableName: 'clients',
 })
 class Client extends Model {
   @PrimaryKey
   @AutoIncrement
-  @ForeignKey(() => Account)
   @Column(DataType.INTEGER)
   id!: number;
 
-  @BelongsTo(() => Account)
+  @HasOne(() => Account, {
+    foreignKey: 'id',
+    as: 'account_id',
+    onDelete: 'CASCADE',
+  })
+  @Column(DataType.INTEGER)
   account!: Account;
 
   @Column(DataType.STRING)
