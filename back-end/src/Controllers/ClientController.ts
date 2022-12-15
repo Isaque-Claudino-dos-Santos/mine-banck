@@ -7,8 +7,11 @@ export default class ClientController {
   public async store(req: Request, res: Response): Promise<void> {
     const client = new Client(req.body);
 
-    // client.save() -> save in table
-
-    res.send(client);
+    try {
+      await client.save();
+      res.send(client);
+    } catch (err) {
+      res.send(err);
+    }
   }
 }
