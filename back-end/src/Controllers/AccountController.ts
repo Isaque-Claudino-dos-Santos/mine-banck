@@ -22,7 +22,6 @@ export default class AccountController {
 
     try {
       await account.save();
-      await client.update({ account: account.id });
       res.send(account);
     } catch (err) {
       res.send(err);
