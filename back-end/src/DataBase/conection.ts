@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
 import config from './Config';
 
 const sequelize = new Sequelize(config);
