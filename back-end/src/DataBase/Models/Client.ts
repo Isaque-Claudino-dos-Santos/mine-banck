@@ -1,64 +1,51 @@
-import {
-  Table,
-  Column,
-  Model,
-  CreatedAt,
-  UpdatedAt,
-  DataType,
-  PrimaryKey,
-  AutoIncrement,
-  HasOne,
-  ForeignKey,
-} from 'sequelize-typescript';
+import { DataTypes, Model } from 'sequelize';
+import DB from '../../DataBase';
 
-import Account from './Account';
-
-@Table({
-  timestamps: true,
-  tableName: 'clients',
-})
-class Client extends Model {
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
-  id!: number;
-
-  @ForeignKey(() => Account)
-  @HasOne(() => Account, {
-    foreignKey: 'id',
-    as: 'account',
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE',
-  })
-  @Column
-  account_id!: number;
-
-  @Column
-  name!: string;
-
-  @Column(DataType.STRING)
-  surname!: string;
-
-  @Column({
-    type: DataType.STRING,
-    unique: true,
-  })
-  email!: string;
-
-  @Column({
-    type: DataType.STRING,
-    unique: true,
-  })
-  nickname!: string;
-
-  @Column
-  password!: string;
-
-  @CreatedAt
-  createAt!: Date;
-
-  @UpdatedAt
-  updateAt!: Date;
+export default class Client extends Model {
+  declare id: number;
+  declare name: string;
+  declare surname: string;
+  declare nickname: string;
+  declare email: string;
+  declare password: string;
 }
 
-export default Client;
+Client.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    surname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    nickname: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+  },
+  { sequelize: DB, tableName: 'clients' }
+);
