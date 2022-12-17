@@ -8,6 +8,7 @@ import {
   PrimaryKey,
   AutoIncrement,
   HasOne,
+  ForeignKey,
 } from 'sequelize-typescript';
 
 import Account from './Account';
@@ -22,15 +23,17 @@ class Client extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
+  @ForeignKey(() => Account)
   @HasOne(() => Account, {
     foreignKey: 'id',
-    as: 'account_id',
+    as: 'account',
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
-  @Column(DataType.INTEGER)
-  account!: Account;
+  @Column
+  account_id!: number;
 
-  @Column(DataType.STRING)
+  @Column
   name!: string;
 
   @Column(DataType.STRING)
@@ -48,7 +51,7 @@ class Client extends Model {
   })
   nickname!: string;
 
-  @Column(DataType.STRING)
+  @Column
   password!: string;
 
   @CreatedAt

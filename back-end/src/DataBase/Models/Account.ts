@@ -4,6 +4,7 @@ import {
   Column,
   DataType,
   Default,
+  ForeignKey,
   Model,
   PrimaryKey,
   Table,
@@ -21,13 +22,15 @@ class Account extends Model {
   @Column(DataType.INTEGER)
   id!: number;
 
+  @ForeignKey(() => Client)
   @BelongsTo(() => Client, {
     foreignKey: 'id',
-    as: 'client_id',
+    as: 'client',
     onDelete: 'CASCADE',
+    onUpdate: 'CASCADE',
   })
   @Column(DataType.INTEGER)
-  client!: Client;
+  client_id!: Client;
 
   @Default(0)
   @Column(DataType.FLOAT)
