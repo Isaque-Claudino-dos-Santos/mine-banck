@@ -4,7 +4,6 @@ import {
   Column,
   DataType,
   Default,
-  ForeignKey,
   Model,
   PrimaryKey,
   Table,
