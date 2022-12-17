@@ -8,8 +8,6 @@ import {
   PrimaryKey,
   AutoIncrement,
   HasOne,
-  ForeignKey,
-  HasMany,
 } from 'sequelize-typescript';
 
 import Account from './Account';
