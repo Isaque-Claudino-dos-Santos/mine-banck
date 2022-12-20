@@ -1,5 +1,6 @@
-/node_modules
-/.env
-/note.txt
-/build
-/dist
+node_modules
+.env
+note.txt
+build
+dist
+src/DataBase/config.json

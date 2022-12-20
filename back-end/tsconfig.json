@@ -7,7 +7,8 @@
     "strict": true,
     "allowJs": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules"],
   "files": ["src/index.ts", "environment.d.ts"]
