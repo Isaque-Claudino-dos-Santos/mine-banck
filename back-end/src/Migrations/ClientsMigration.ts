@@ -1,4 +1,4 @@
-import Migration from './Migration'
+import Migration from '../DB/Migration'
 
 export default class ClientsMigration extends Migration {
   public up(): string {

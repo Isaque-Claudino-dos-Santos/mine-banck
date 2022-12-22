@@ -1,6 +1,6 @@
 import ConnectionDB from './ConnectionDB'
 import { Connection, ConnectionOptions } from 'mysql2'
-import Migration from '../Migrations/Migration'
+import Migration from './Migration'
 
 export default class DB {
   private readonly connectionDB: ConnectionDB
