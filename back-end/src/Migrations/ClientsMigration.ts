@@ -12,7 +12,17 @@ export default class ClientsMigration extends Migration {
       .column('nickName', ['varchar(100)', 'not null'])
       .column('email', ['varchar(200)', 'not null'])
       .column('password', ['varchar(300)', 'not null'])
+      .column('account_id', ['int'])
       .build()
+  }
+
+  public associates(): string[] {
+    return [
+      this.table
+        .assoc(this.name, 'account_id')
+        .reference('accounts', 'id')
+        .build(),
+    ]
   }
 
   public down(): string {
