@@ -1,10 +1,12 @@
 import ConnectionDB from './ConnectionDB'
-import { ConnectionOptions } from 'mysql2'
+import { Connection, ConnectionOptions } from 'mysql2'
 
 export default class DB {
-  public readonly connectionDB: ConnectionDB
+  private readonly connectionDB: ConnectionDB
+  public readonly connection: Promise<Connection>
 
   constructor(connectionOptions: ConnectionOptions) {
     this.connectionDB = new ConnectionDB(connectionOptions)
+    this.connection = this.connectionDB.onConnect()
   }
 }
