@@ -34,10 +34,8 @@ export default class MigrationHandler {
   public upAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
-        if (!exist)
-          this.connection.query(m.up(), (err) => {
-            if (err) console.log(err)
-          })
+        if (!exist) this.connection.query(m.up())
+        if (exist) this.callAssociates()
       })
     })
   }
@@ -45,10 +43,7 @@ export default class MigrationHandler {
   public downAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
-        if (exist)
-          this.connection.query(m.down(), (err) => {
-            if (err) console.log(err)
-          })
+        if (exist) this.connection.query(m.down())
       })
     })
   }
