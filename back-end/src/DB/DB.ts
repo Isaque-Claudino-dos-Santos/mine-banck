@@ -6,7 +6,7 @@ export default class DB {
   private readonly connectionDB: ConnectionDB
 
   public readonly connection: Connection
-  public migrations: Migration[] = []
+  public migrations: typeof Migration[] = []
 
   constructor(connectionOptions: ConnectionOptions) {
     this.connectionDB = new ConnectionDB(connectionOptions)
