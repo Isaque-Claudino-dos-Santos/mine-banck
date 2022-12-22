@@ -43,7 +43,9 @@ export default class MigrationHandler {
   public downAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
+        this.connection.query('SET foreign_key_checks = 0')
         if (exist) this.connection.query(m.down())
+        this.connection.query('SET foreign_key_checks = 1')
       })
     })
   }
