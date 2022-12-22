@@ -1,4 +1,10 @@
 import ConnectionDB from './ConnectionDB'
-import config from './config'
+import { ConnectionOptions } from 'mysql2'
 
-const connectionDB = new ConnectionDB(config)
+export default class DB {
+  public readonly connectionDB: ConnectionDB
+
+  constructor(connectionOptions: ConnectionOptions) {
+    this.connectionDB = new ConnectionDB(connectionOptions)
+  }
+}
