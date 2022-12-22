@@ -1,5 +1,5 @@
 import Migration from './Migration'
-import { Connection, OkPacket, ResultSetHeader, RowDataPacket } from 'mysql2'
+import { Connection } from 'mysql2'
 import QueryMysql from '../QueryMysql/index'
 
 export default class MigrationHandler {
@@ -21,21 +21,10 @@ export default class MigrationHandler {
     })
   }
 
-  private callAssociates(): void {
-    this.migrations.forEach((m) => {
-      m.associates().forEach((query) => {
-        this.connection.query(query, (err) => {
-          if (err) throw console.log(err)
-        })
-      })
-    })
-  }
-
   public upAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
         if (!exist) this.connection.query(m.up())
-        if (exist) this.callAssociates()
       })
     })
   }
