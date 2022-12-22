@@ -1,36 +1,39 @@
 import Migration from './Migration'
-import { Connection } from 'mysql2'
+import { Connection, OkPacket, ResultSetHeader, RowDataPacket } from 'mysql2'
+import QueryMysql from '../QueryMysql/index'
 
 export default class MigrationHandler {
+  private query = new QueryMysql()
+
   constructor(
     private connection: Connection,
     private migrations: Migration[]
   ) {}
 
-  private tableExist(
-    tableName: string,
+  private tableExists(
+    table: string,
     callback: (exists: boolean) => void
   ): void {
     const { database } = this.connection.config
-    this.connection.query(
-      `SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '${database}' AND TABLE_NAME = '${tableName}'`,
-      (err, res: []) => {
-        if (err) throw console.log(err)
-
-        callback(res.length > 0)
-      }
-    )
+    const query = this.query.table.exist(database ?? '', table).build()
+    this.connection.query(query, (err, res: []) => {
+      callback(res.length > 0)
+    })
   }
 
-  upAll(): void {
+  public upAll(): void {
     this.migrations.forEach((m) => {
-      this.tableExist('clients', (exist) => {
+      this.tableExists(m.name, (exist) => {
         if (!exist) this.connection.query(m.up())
       })
     })
   }
 
-  downAll(): void {
-    this.migrations.forEach((m) => this.connection.query(m.down()))
+  public downAll(): void {
+    this.migrations.forEach((m) => {
+      this.tableExists(m.name, (exist) => {
+        if (exist) this.connection.query(m.down())
+      })
+    })
   }
 }
