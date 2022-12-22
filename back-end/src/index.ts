@@ -6,7 +6,12 @@ import router from './router'
 //Migrations
 import ClientsMigration from './Migrations/ClientsMigration'
 
-const db = new DB(dataBaseConfig)
-db.migrations = [ClientsMigration]
+const db = new DB(dataBaseConfig, [new ClientsMigration()])
 
 const server = new Server(serverConfig.port, serverConfig.host, router)
+
+try {
+  db.migration.upAll()
+} catch (err) {
+  console.log(err)
+}
