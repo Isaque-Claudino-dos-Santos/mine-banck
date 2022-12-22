@@ -1,7 +1,7 @@
 export default class QueryCreateTable {
   private columns: string[] = []
 
-  constructor(private tableName: string) {}
+  constructor(private table: string) {}
 
   private hasBeenDefinedColumns(): boolean {
     return this.columns.length > 0
@@ -14,9 +14,9 @@ export default class QueryCreateTable {
 
   public build(): string {
     if (!this.hasBeenDefinedColumns())
-      throw new Error(`Any columns defined with table name ${this.tableName}`)
+      throw new Error(`Any columns defined with table name ${this.table}`)
 
-    let query = `create table ${this.tableName}`
+    let query = `create table ${this.table}`
     query += `(${this.columns.join(', ')})`
     return query
   }

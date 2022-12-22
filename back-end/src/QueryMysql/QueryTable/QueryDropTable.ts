@@ -1,7 +1,7 @@
 export default class QueryDropTable {
-  constructor(private readonly tableName: string) {}
+  constructor(private readonly table: string) {}
 
   public build(): string {
-    return `drop table ${this.tableName}`
+    return `drop table ${this.table}`
   }
 }
