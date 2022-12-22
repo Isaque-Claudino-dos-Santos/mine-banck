@@ -1,9 +1,9 @@
-import mysql2 from 'mysql2'
+import mysql2, { Connection, ConnectionOptions } from 'mysql2'
 
 export default class ConnectionDB {
-  constructor(private readonly options: mysql2.ConnectionOptions) {}
+  constructor(private readonly options: ConnectionOptions) {}
 
-  async onConnect(): Promise<mysql2.Connection> {
+  onConnect(): Connection {
     return mysql2.createConnection(this.options)
   }
 }
