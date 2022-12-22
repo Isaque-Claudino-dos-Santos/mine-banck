@@ -8,4 +8,6 @@ export default abstract class Migration {
   abstract up(): string
 
   abstract down(): string
+
+  abstract associates(): string[]
 }
