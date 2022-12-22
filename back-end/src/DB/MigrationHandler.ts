@@ -21,10 +21,23 @@ export default class MigrationHandler {
     })
   }
 
+  private callAssociates(): void {
+    this.migrations.forEach((m) => {
+      m.associates().forEach((query) => {
+        this.connection.query(query, (err) => {
+          if (err) throw console.log(err)
+        })
+      })
+    })
+  }
+
   public upAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
-        if (!exist) this.connection.query(m.up())
+        if (!exist)
+          this.connection.query(m.up(), (err) => {
+            if (err) console.log(err)
+          })
       })
     })
   }
@@ -32,7 +45,10 @@ export default class MigrationHandler {
   public downAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
-        if (exist) this.connection.query(m.down())
+        if (exist)
+          this.connection.query(m.down(), (err) => {
+            if (err) console.log(err)
+          })
       })
     })
   }
