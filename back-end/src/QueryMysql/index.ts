@@ -1,3 +1,5 @@
-import QueryMysql from './QueryMysql'
+import QueryTable from './QueryTable'
 
-export default QueryMysql
+export default class QueryMysql {
+  public readonly table = new QueryTable()
+}
