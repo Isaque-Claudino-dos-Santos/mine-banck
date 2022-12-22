@@ -1,4 +1,4 @@
-export default class QueryCrateTable {
+export default class QueryCreateTable {
   private columns: string[] = []
 
   constructor(private tableName: string) {}

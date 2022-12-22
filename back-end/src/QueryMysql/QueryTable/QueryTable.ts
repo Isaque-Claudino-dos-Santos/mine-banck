@@ -1,7 +1,7 @@
-import QueryCrateTable from './QueryCreateTable'
+import QueryCreateTable from './QueryCreateTable'
 
 export default class QueryTable {
-  public create(tableName: string): QueryCrateTable {
-    return new QueryCrateTable(tableName)
+  public create(tableName: string): QueryCreateTable {
+    return new QueryCreateTable(tableName)
   }
 }

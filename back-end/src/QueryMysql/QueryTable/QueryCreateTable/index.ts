@@ -1,3 +1,3 @@
-import QueryCrateTable from './QueryCreateTable'
+import QueryCreateTable from './QueryCreateTable'
 
-export default QueryCrateTable
+export default QueryCreateTable
