@@ -1,7 +1,7 @@
 import Migration from '../DB/Migration'
 
 export default class AccountMigration extends Migration {
-  name: string = 'account'
+  name: string = 'accounts'
 
   up(): string {
     return this.table
