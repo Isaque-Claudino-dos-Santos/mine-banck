@@ -21,6 +21,8 @@ export default class AccountMigration extends Migration {
       this.table
         .assoc(this.name, 'client_id')
         .reference('clients', 'id')
+        .onDelete('cascade')
+        .onUpdate('cascade')
         .build(),
     ]
   }
