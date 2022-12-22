@@ -1,12 +1,17 @@
 import QueryCreateTable from './QueryCreateTable'
 import QueryDropTable from './QueryDropTable'
+import QueryExistTable from './QueryExistTable'
 
 export default class QueryTable {
-  public create(tableName: string): QueryCreateTable {
-    return new QueryCreateTable(tableName)
+  public create(table: string): QueryCreateTable {
+    return new QueryCreateTable(table)
   }
 
-  public drop(tableName: string): QueryDropTable {
-    return new QueryDropTable(tableName)
+  public drop(table: string): QueryDropTable {
+    return new QueryDropTable(table)
+  }
+
+  public exist(database: string, table: string): QueryExistTable {
+    return new QueryExistTable(database, table)
   }
 }
