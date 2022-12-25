@@ -14,7 +14,7 @@ const db = new DB(dataBaseConfig, [
 
 const server = new Server(serverConfig.port, serverConfig.host, router)
 
-// db.migration.upAll()
+db.migration.upAll()
 // db.migration.downAll()
 
 //next action create assciation between migrations

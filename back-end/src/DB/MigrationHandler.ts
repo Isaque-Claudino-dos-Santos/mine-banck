@@ -12,12 +12,22 @@ export default class MigrationHandler {
 
   private tableExists(
     table: string,
-    callback: (exists: boolean) => void
+    callback: (resute: boolean) => void
   ): void {
     const { database } = this.connection.config
     const query = this.query.table.exist(database ?? '', table).build()
+
     this.connection.query(query, (err, res: []) => {
-      callback(res.length > 0)
+      if (res.length > 0) callback(true)
+      else callback(false)
+    })
+  }
+
+  private assoc(): void {
+    this.migrations.forEach((migration) => {
+      migration.associates().forEach((queryString) => {
+        this.connection.query(queryString)
+      })
     })
   }
 
@@ -27,14 +37,20 @@ export default class MigrationHandler {
         if (!exist) this.connection.query(m.up())
       })
     })
+
+    this.assoc()
   }
 
   public downAll(): void {
     this.migrations.forEach((m) => {
       this.tableExists(m.name, (exist) => {
-        this.connection.query('SET foreign_key_checks = 0')
-        if (exist) this.connection.query(m.down())
-        this.connection.query('SET foreign_key_checks = 1')
+        if (!exist) return
+        this.connection.query('SET foreign_key_checks = 0', (err) => {
+          if (err) throw console.log(err)
+          this.connection.query(m.down(), () => {
+            this.connection.query('SET foreign_key_checks = 1')
+          })
+        })
       })
     })
   }
