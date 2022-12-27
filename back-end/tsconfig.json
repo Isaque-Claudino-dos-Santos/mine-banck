@@ -2,13 +2,13 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "build",
-    "module": "Node16",
+    "module": "ES6",
     "target": "es6",
     "strict": true,
     "allowJs": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "resolveJsonModule": true
+    "moduleResolution": "Node"
   },
   "exclude": ["node_modules"],
   "files": ["src/index.ts", "environment.d.ts"],

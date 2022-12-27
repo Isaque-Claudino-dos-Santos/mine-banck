@@ -1,7 +1,7 @@
-import QueryTable from '../QueryMysql/QueryTable'
+import MysqlQueryString from 'mysql-qs-creator'
 
 export default abstract class Migration {
-  protected readonly table = new QueryTable()
+  protected readonly table = new MysqlQueryString().table
 
   abstract name: string
 
