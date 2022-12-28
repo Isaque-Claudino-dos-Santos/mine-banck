@@ -12,7 +12,7 @@
     "typescript": "^4.9.4"
   },
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch=/node_modules/ src",
+    "dev": "ts-node-dev --respawn --transpile-only  src",
     "test": "jest"
   },
   "keywords": [],
@@ -22,7 +22,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "mysql-qs-creator": "^1.0.6",
+    "mysql-qs-creator": "^1.0.8",
     "mysql2": "^2.3.3"
   }
 }

@@ -1,5 +1,4 @@
 import { Router } from 'express'
-import QueryMysql from './QueryMysql/index'
 const router = Router()
 
 router.get('/', (req, res) => {

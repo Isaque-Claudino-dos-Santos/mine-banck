@@ -1,30 +1,19 @@
-import express, { Router } from 'express'
+import express, { Application } from 'express'
+import { env } from 'process'
+import router from '../router'
 
 export default class Server {
-  private readonly app = express()
+  public readonly app = express()
 
-  constructor(
-    private readonly port: number,
-    private readonly host: string = 'localhost',
-    private readonly router: Router | undefined = undefined
-  ) {
-    this.uses()
-    this.listen()
-  }
-
-  private aplicateRouter(): void {
-    if (this.router) this.app.use(this.router)
-  }
-
-  private uses(): void {
+  async uses() {
     this.app.use(express.json())
-    this.app.use(express.urlencoded({ extended: true }))
-    this.aplicateRouter()
+    this.app.use(express.urlencoded())
+    this.app.use(router)
   }
 
-  private listen(): void {
-    this.app.listen(this.port, this.host, () =>
-      console.log(`Open serve in http://${this.host}:${this.port}`)
+  async listen() {
+    this.app.listen(Number(env.APP_PORT), env.APP_HOST, () =>
+      console.log(`Open serve in http://${env.APP_HOST}:${env.APP_PORT}`)
     )
   }
 }
