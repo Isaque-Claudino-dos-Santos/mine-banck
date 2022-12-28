@@ -1,14 +1,14 @@
 import MysqlQueryString from 'mysql-qs-creator'
-import mysql2, { Connection } from 'mysql2/promise'
+import mysql2, { Connection, Pool } from 'mysql2/promise'
 import { env } from 'process'
 import Migration from './Migration'
 
 export default class DataBase {
   private readonly queryCreator = new MysqlQueryString()
-  readonly connection: Promise<Connection>
+  readonly connection: Pool
 
   constructor() {
-    this.connection = mysql2.createConnection({
+    this.connection = mysql2.createPool({
       database: env.DB_DBNAME,
       host: env.DB_HOST,
       port: Number(env.DB_PORT),
@@ -18,27 +18,21 @@ export default class DataBase {
   }
 
   private async useDataBase() {
-    this.connection.then(({ execute }) => {
-      const query = this.queryCreator.database.use(env.DB_DBNAME)
-      execute(query)
-    })
+    const query = this.queryCreator.database.use(env.DB_DBNAME)
+    this.connection.execute(query)
   }
 
   private async migrationsUp(migrations: Migration[]) {
-    this.connection.then(({ execute }) => {
-      migrations.forEach((migration) => {
-        const methodCreate = this.queryCreator.table.create
-        execute(migration.up(methodCreate))
-      })
+    migrations.forEach((migration) => {
+      const methodCreate = this.queryCreator.table.create
+      this.connection.execute(migration.up(methodCreate))
     })
   }
 
   private async migrationsDown(migrations: Migration[]) {
-    this.connection.then(({ execute }) => {
-      migrations.forEach((migration) => {
-        const methodDrop = this.queryCreator.table.drop
-        execute(migration.down(methodDrop))
-      })
+    migrations.forEach((migration) => {
+      const methodDrop = this.queryCreator.table.drop
+      this.connection.execute(migration.down(methodDrop))
     })
   }
 
@@ -46,6 +40,6 @@ export default class DataBase {
     await this.useDataBase()
     await this.migrationsUp(migrations)
     await this.migrationsDown(migrations)
-    await this.connection.then(({ end }) => end())
+    await this.connection.end()
   }
 }
