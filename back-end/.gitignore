@@ -3,4 +3,3 @@ node_modules
 note.txt
 build
 dist
-src/DataBase/config.json

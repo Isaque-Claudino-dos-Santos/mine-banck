@@ -1,16 +1,16 @@
 import Server from '../Server'
 import DataBase from '../DataBase'
 
-const server = new Server()
-const database = new DataBase()
-
 export default class Application {
+  private readonly server = new Server()
+  readonly database = new DataBase()
+
   constructor() {
     console.clear()
   }
 
   async bootServer() {
-    await server.uses()
-    await server.listen()
+    await this.server.uses()
+    await this.server.listen()
   }
 }

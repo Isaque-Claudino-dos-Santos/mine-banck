@@ -40,6 +40,5 @@ export default class DataBase {
     await this.useDataBase()
     await this.migrationsUp(migrations)
     await this.migrationsDown(migrations)
-    await this.connection.end()
   }
 }
